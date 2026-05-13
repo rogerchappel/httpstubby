@@ -4,6 +4,7 @@ const http = require('node:http');
 const fs = require('node:fs');
 const path = require('node:path');
 const url = require('node:url');
+const { validateFixture } = require('./validator.js');
 
 function loadFixtures(fixturesDir) {
   if (!fs.existsSync(fixturesDir)) {
@@ -17,7 +18,8 @@ function loadFixtures(fixturesDir) {
     try {
       const raw = fs.readFileSync(filePath, 'utf8');
       const fixture = JSON.parse(raw);
-      if (fixture.route && fixture.response) {
+      const validationErrors = validateFixture(fixture);
+      if (validationErrors.length === 0) {
         fixtures.push(fixture);
       }
     } catch {
