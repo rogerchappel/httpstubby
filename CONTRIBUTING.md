@@ -1,79 +1,56 @@
-# Contributing
+# Contributing to HTTPStubby
 
-Thanks for helping improve `httpstubby`.
+Thank you for your interest in HTTPStubby! Here's how to contribute.
 
-This project values small, reviewable contributions with clear verification.
+## Getting Started
 
-## Issues
-
-Before opening an issue:
-
-- Search existing issues.
-- Confirm the issue applies to `httpstubby`.
-- Include enough context for maintainers to understand or reproduce the request.
-
-Bug reports should include:
-
-- What happened.
-- What you expected.
-- Steps to reproduce.
-- Relevant logs, screenshots, or files.
-- The smallest verification step that demonstrates the issue.
-
-Feature requests should include:
-
-- The use case.
-- Why the current project does not solve it.
-- Risks or compatibility concerns.
-- Suggested files or behavior that may need to change.
-
-## Pull Requests
-
-Pull requests should:
-
-- Focus on one reviewable intent.
-- Use a branch.
-- Follow Conventional Commits.
-- Include tests or verification appropriate to the change.
-- Update documentation when behavior or usage changes.
-- Avoid unrelated formatting or dependency churn.
-- Avoid secrets, private contact details, and project-specific sensitive information.
-
-## Review Pack
-
-Use this format for meaningful changes:
-
-```md
-## Review Pack
-Repo:
-Branch:
-PR:
-Task:
-Status: done / blocked / needs review
-Summary:
-Commits:
-Files changed:
-Verification:
-Risk level:
-Rollback plan:
-Human decision needed:
-Next recommended task:
+```bash
+git clone https://github.com/rogerchappel/httpstubby.git
+cd httpstubby
+npm install
+npm test
 ```
 
-## Verification
+## Development Workflow
 
-Every contribution should include verification.
+1. Fork the repo and create a feature branch
+2. Make your changes with tests
+3. Run `npm test` and `bash scripts/validate.sh`
+4. Open a pull request
 
-Examples:
+## Commit Conventions
 
-- Documentation: inspect rendered Markdown or review the diff.
-- Tests: run the targeted test command.
-- Types: run the project typecheck.
-- Build: run the smallest build command that covers the change.
-- Manual QA: provide exact steps and observed result.
+We use [Conventional Commits](https://www.conventionalcommits.org/):
 
-If verification cannot be run, explain why and provide the exact command maintainers should run.
+- `feat:` new features
+- `fix:` bug fixes
+- `docs:` documentation changes
+- `test:` test additions or changes
+- `ci:` CI/CD changes
+- `chore:` maintenance tasks
 
-## Maintainer Review
+## Code Style
 
-Maintainers may request narrower scope, clearer verification, additional tests, or safer defaults before merging.
+- Use CommonJS (`require`, `module.exports`)
+- `'use strict';` at the top of every file
+- Single-quoted strings
+- No semicolons needed but be consistent
+- Prefer `const` over `let`, avoid `var`
+
+## Safety
+
+- No telemetry or hidden network calls
+- Read-only fixture serving by default
+- Explicit paths only — no globbing or traversal
+- Fixture-backed tests for all behavior
+
+## Reporting Issues
+
+Use GitHub issues for bugs, feature requests, or questions. Include:
+- Node.js version
+- Steps to reproduce
+- Expected vs actual behavior
+
+## License
+
+By contributing, you agree your contributions will be licensed under the MIT License.
