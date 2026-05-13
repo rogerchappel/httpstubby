@@ -3,13 +3,15 @@
 const { test, after } = require('node:test');
 const assert = require('node:assert');
 const http = require('node:http');
-const { serve } = require('../src/server.js');
 const fs = require('node:fs');
 const path = require('node:path');
 const os = require('node:os');
+const url = require('node:url');
+const { loadFixtures, matchRoute } = require('../src/server.js');
 
 const PORT = 19876;
 let server = null;
+let tmpDir = null;
 
 function httpRequest(method, pathname) {
   return new Promise((resolve, reject) => {
@@ -29,42 +31,44 @@ function httpRequest(method, pathname) {
   });
 }
 
-test.before = async () => {
-  const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'httpstubby-http-test-'));
-  const fixturePath = path.join(tmpDir, 'test.json');
-  fs.writeFileSync(
-    fixturePath,
-    JSON.stringify({
-      route: { method: 'GET', path: '/http-test' },
-      response: { status: 200, headers: { 'Content-Type': 'application/json' }, body: { result: 'ok' } },
-    }),
-    'utf8'
-  );
+// Setup: create temp dir with fixture and start server
+tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'httpstubby-http-test-'));
+const fixturePath = path.join(tmpDir, 'test.json');
+fs.writeFileSync(
+  fixturePath,
+  JSON.stringify({
+    route: { method: 'GET', path: '/http-test' },
+    response: { status: 200, headers: { 'Content-Type': 'application/json' }, body: { result: 'ok' } },
+  }),
+  'utf8'
+);
 
-  server = http.createServer((req, res) => {
-    const { loadFixtures, matchRoute } = require('../src/server.js');
-    const fixtures = loadFixtures(tmpDir);
-    const urlMod = require('node:url');
-    const parsed = urlMod.parse(req.url, true);
-    const pathname = parsed.pathname || '/';
-    const responseSpec = matchRoute(fixtures, req.method || 'GET', pathname);
+server = http.createServer((req, res) => {
+  const fixtures = loadFixtures(tmpDir);
+  const parsed = url.parse(req.url, true);
+  const pathname = parsed.pathname || '/';
+  const responseSpec = matchRoute(fixtures, req.method || 'GET', pathname);
 
-    if (!responseSpec) {
-      res.writeHead(404);
-      res.end(JSON.stringify({ error: 'not found' }));
-      return;
-    }
+  if (!responseSpec) {
+    res.writeHead(404);
+    res.end(JSON.stringify({ error: 'not found' }));
+    return;
+  }
 
-    res.writeHead(responseSpec.status || 200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify(responseSpec.body));
-  });
+  res.writeHead(responseSpec.status || 200, { 'Content-Type': 'application/json' });
+  res.end(JSON.stringify(responseSpec.body));
+});
 
-  await new Promise((resolve) => {
-    server.listen(PORT, '127.0.0.1', resolve);
-  });
-};
+server.listen(PORT, '127.0.0.1');
+
+after(() => {
+  if (server) server.close();
+  if (tmpDir) fs.rmSync(tmpDir, { recursive: true });
+});
 
 test('HTTP server returns 200 for matched route', async () => {
+  // Small delay to ensure server is bound
+  await new Promise((r) => setTimeout(r, 100));
   const { status, body } = await httpRequest('GET', '/http-test');
   assert.strictEqual(status, 200);
   const parsed = JSON.parse(body);
@@ -79,10 +83,4 @@ test('HTTP server returns 404 for unmatched route', async () => {
 test('HTTP server returns 404 for wrong method', async () => {
   const { status } = await httpRequest('POST', '/http-test');
   assert.strictEqual(status, 404);
-});
-
-after(() => {
-  if (server) {
-    server.close();
-  }
 });
