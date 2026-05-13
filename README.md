@@ -1,80 +1,93 @@
 # HTTPStubby 🧸
 
-A tiny local-first API stub server that turns JSON fixtures into deterministic HTTP responses.  
-No cloud. No telemetry. No brittle ad-hoc scripts. Just fixtures on disk and a single command.
+> A tiny local-first API stub server from JSON fixtures.  
+> **No cloud. No telemetry. No bullshit.** Just fixtures on disk and a single command.
 
-## Why HTTPStubby?
+## Why?
 
-Developers and agents need safe, fake APIs without hidden network calls or SaaS dashboards.  
-HTTPStubby reads `.json` fixture files, matches incoming requests, and returns exactly what you defined.  
-It's perfect for integration tests, demos, agent sandboxes, and local prototyping.
+You're building an integration test. Or a demo. Or an agent sandbox.  
+You need a fake API that doesn't phone home, doesn't need Docker, and doesn't require a 47-step config file.
+
+HTTPStubby reads `.json` fixtures from a directory and serves them as HTTP responses.  
+That's it. That's the product.
 
 ## Quick Start
 
 ```bash
-# Install
+# Install globally
 npm install -g httpstubby
 
-# Create a demo project
+# Scaffold a project
 httpstubby init ./my-stubs
 
 # Start the server
-httpstubby serve --dir ./my-stubs/fixtures
+cd my-stubs && httpstubby serve
 
-# Or use npx without installing
-npx httpstubby serve --dir ./fixtures
+# Hit it
+curl http://127.0.0.1:8787/hello
+# → {"message":"Hello from HTTPStubby! 🧸"}
+```
+
+### One-shot with npx
+
+```bash
+npx httpstubby init ./demo && npx httpstubby serve --dir ./demo/fixtures
 ```
 
 ## Fixture Format
 
-Fixtures are simple JSON files under a directory:
+Every `.json` file in your fixtures directory is a route:
 
 ```json
 {
   "route": {
     "method": "GET",
-    "path": "/hello"
+    "path": "/api/users/1"
   },
   "response": {
     "status": 200,
     "headers": { "Content-Type": "application/json" },
-    "body": { "message": "Hello from HTTPStubby! 🧸" }
+    "body": { "id": 1, "name": "Alice" }
   }
 }
 ```
 
-Each `.json` file with a `route` and `response` key becomes an active stub.
+Save it as `fixtures/user-1.json`. Done.
 
 ## CLI Reference
 
 ```bash
 httpstubby --help
-httpstubby init [dir]                # Create a new fixture project
+httpstubby init [dir]                # Scaffold a fixture project
 httpstubby serve [options]           # Start the stub server
-  -p, --port <port>    Port to listen on (default: 8787)
-  -d, --dir <dir>      Fixtures directory (default: ./fixtures)
-  --cors               Enable CORS headers
 ```
+
+### serve options
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `-p, --port` | `8787` | Port to listen on |
+| `-d, --dir` | `./fixtures` | Fixtures directory |
+| `--cors` | `false` | Enable CORS headers |
 
 ## Examples
 
-See the `fixtures/` and `examples/` directories for ready-to-run samples:
+The `examples/` directory ships with ready-to-run samples:
 
 ```bash
-# Create demo fixtures
-httpstubby init ./demo
-
-# Run against them
-httpstubby serve --dir ./demo/fixtures
-curl http://127.0.0.1:8787/hello
+httpstubby serve --dir ./examples
+curl http://127.0.0.1:8787/api/status     # → 200 healthy
+curl -X POST http://127.0.0.1:8787/api/login   # → 401 unauthorized
+curl -X POST http://127.0.0.1:8787/api/users   # → 201 created
 ```
 
-## Safety & Design
+## Safety & Guarantees
 
-- **Local-first**: Reads only the directories you pass explicitly.
-- **No telemetry**: No hidden network calls, no analytics.
-- **Deterministic**: Responses are exactly what your fixtures declare.
-- **Fixture-backed tests**: Every feature is testable from disk.
+- **Local-first**: Reads only what you pass. No hidden API calls.
+- **No telemetry**: Zero analytics. Zero tracking. None.
+- **Deterministic**: Same fixture → same response, every time.
+- **Read-only serving**: The server never writes to your fixtures.
+- **Predictable exits**: `0` = running, `1` = no fixtures found.
 
 ## Development
 
@@ -82,19 +95,19 @@ curl http://127.0.0.1:8787/hello
 git clone https://github.com/rogerchappel/httpstubby.git
 cd httpstubby
 npm install
-npm test          # Run tests
-npm run check     # Syntax-check source files
-npm run smoke     # Run local smoke validation
+npm test           # 14 tests
+npm run check      # syntax validation
+npm run smoke      # boots server, curls fixture
 ```
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for workflow and PR guidelines.
+See [CONTRIBUTING.md](CONTRIBUTING.md). TL;DR: fork, branch, test, PR. Use Conventional Commits.
 
 ## License
 
 MIT. See [LICENSE](LICENSE).
 
-## Acknowledgements
+## Inspiration
 
-Inspired by Mockoon, Prism, and WireMock — reframed as a zero-config fixture CLI for local agent workflows.
+Borrowed the good parts from Mockoon, Prism, and WireMock — stripped the dashboards, killed the SaaS, kept the fixtures.
