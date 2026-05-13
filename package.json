@@ -1,0 +1,48 @@
+{
+  "name": "httpstubby",
+  "version": "0.1.0",
+  "description": "A tiny local-first API stub server from JSON fixtures.",
+  "type": "commonjs",
+  "main": "./src/index.js",
+  "bin": {
+    "httpstubby": "./src/index.js"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "start": "node src/index.js",
+    "smoke": "node src/index.js --help && npm run smoke:serve",
+    "smoke:serve": "node scripts/validate.sh",
+    "build": "echo 'No build step required'",
+    "check": "node --check src/index.js && node --check src/server.js && node --check src/init.js"
+  },
+  "keywords": [
+    "api",
+    "stub",
+    "mock",
+    "fixture",
+    "cli",
+    "local-first",
+    "testing"
+  ],
+  "author": "Roger Chappel <roger@rogerchappel.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rogerchappel/httpstubby.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rogerchappel/httpstubby/issues"
+  },
+  "homepage": "https://github.com/rogerchappel/httpstubby#readme",
+  "dependencies": {
+    "commander": "^12.1.0"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18"
+  }
+}
