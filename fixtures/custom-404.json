@@ -1,0 +1,11 @@
+{
+  "route": {
+    "method": "GET",
+    "path": "/api/custom-error"
+  },
+  "response": {
+    "status": 404,
+    "headers": { "Content-Type": "application/json" },
+    "body": { "error": "not_found", "message": "Resource not found" }
+  }
+}
