@@ -1,0 +1,12 @@
+{
+  "_comment": "Example: simulate a slow endpoint (use --delay flag in future versions)",
+  "route": {
+    "method": "GET",
+    "path": "/api/slow"
+  },
+  "response": {
+    "status": 200,
+    "headers": { "Content-Type": "application/json" },
+    "body": { "message": "This took a while" }
+  }
+}

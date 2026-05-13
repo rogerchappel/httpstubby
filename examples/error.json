@@ -1,0 +1,11 @@
+{
+  "route": {
+    "method": "POST",
+    "path": "/api/login"
+  },
+  "response": {
+    "status": 401,
+    "headers": { "Content-Type": "application/json" },
+    "body": { "error": "unauthorized", "message": "Invalid credentials" }
+  }
+}

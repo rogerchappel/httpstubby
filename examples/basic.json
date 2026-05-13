@@ -1,0 +1,11 @@
+{
+  "route": {
+    "method": "GET",
+    "path": "/api/status"
+  },
+  "response": {
+    "status": 200,
+    "headers": { "Content-Type": "application/json" },
+    "body": { "status": "healthy", "uptime": 42 }
+  }
+}
