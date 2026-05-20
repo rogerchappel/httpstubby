@@ -15,9 +15,11 @@
     "test": "node --test",
     "start": "node src/index.js",
     "smoke": "node src/index.js --help && npm run smoke:serve",
-    "smoke:serve": "node scripts/validate.sh",
+    "smoke:serve": "bash scripts/validate.sh",
     "build": "echo 'No build step required'",
-    "check": "node --check src/index.js && node --check src/server.js && node --check src/init.js"
+    "check": "node --check src/index.js && node --check src/server.js && node --check src/init.js && node --check src/validator.js && node --check src/version.js",
+    "package:smoke": "npm pack --dry-run",
+    "release:check": "npm test && npm run check && npm run build && npm run smoke && npm run package:smoke"
   },
   "keywords": [
     "api",
