@@ -1,0 +1,11 @@
+{
+  "route": {
+    "method": "GET",
+    "path": "/validate"
+  },
+  "response": {
+    "status": 200,
+    "headers": { "Content-Type": "application/json" },
+    "body": { "smoke": "passed" }
+  }
+}
