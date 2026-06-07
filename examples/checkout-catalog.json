@@ -1,0 +1,17 @@
+{
+  "route": {
+    "method": "GET",
+    "path": "/api/catalog"
+  },
+  "response": {
+    "status": 200,
+    "headers": { "Content-Type": "application/json" },
+    "body": {
+      "items": [
+        { "sku": "starter", "name": "Starter plan", "price": 19 },
+        { "sku": "team", "name": "Team plan", "price": 49 }
+      ]
+    }
+  }
+}
+

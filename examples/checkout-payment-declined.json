@@ -1,0 +1,15 @@
+{
+  "route": {
+    "method": "POST",
+    "path": "/api/checkout"
+  },
+  "response": {
+    "status": 402,
+    "headers": { "Content-Type": "application/json" },
+    "body": {
+      "error": "payment_declined",
+      "message": "Use a different payment method."
+    }
+  }
+}
+
