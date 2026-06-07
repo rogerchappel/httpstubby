@@ -81,6 +81,8 @@ curl -X POST http://127.0.0.1:8787/api/login   # → 401 unauthorized
 curl -X POST http://127.0.0.1:8787/api/users   # → 201 created
 ```
 
+For a slightly fuller checkout-flow demo, see [docs/tutorials/checkout-fixtures.md](docs/tutorials/checkout-fixtures.md).
+
 ## Safety & Guarantees
 
 - **Local-first**: Reads only what you pass. No hidden API calls.
