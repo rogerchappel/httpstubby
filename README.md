@@ -82,6 +82,11 @@ curl -X POST http://127.0.0.1:8787/api/users   # → 201 created
 ```
 
 For a slightly fuller checkout-flow demo, see [docs/tutorials/checkout-fixtures.md](docs/tutorials/checkout-fixtures.md).
+To verify that flow from one command:
+
+```bash
+bash demo/checkout-contract-smoke.sh
+```
 
 ## Safety & Guarantees
 
