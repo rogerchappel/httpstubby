@@ -79,6 +79,7 @@ httpstubby serve --dir ./examples
 curl http://127.0.0.1:8787/api/status     # → 200 healthy
 curl -X POST http://127.0.0.1:8787/api/login   # → 401 unauthorized
 curl -X POST http://127.0.0.1:8787/api/users   # → 201 created
+curl -X POST http://127.0.0.1:8787/webhooks/payment.succeeded   # → 202 accepted
 ```
 
 For a slightly fuller checkout-flow demo, see [docs/tutorials/checkout-fixtures.md](docs/tutorials/checkout-fixtures.md).
@@ -86,6 +87,14 @@ To verify that flow from one command:
 
 ```bash
 bash demo/checkout-contract-smoke.sh
+```
+
+For local webhook receiver demos, see
+[docs/tutorials/webhook-receiver-fixtures.md](docs/tutorials/webhook-receiver-fixtures.md)
+or run:
+
+```bash
+bash demo/webhook-receiver-smoke.sh
 ```
 
 ## Safety & Guarantees
