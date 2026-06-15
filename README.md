@@ -88,6 +88,14 @@ To verify that flow from one command:
 bash demo/checkout-contract-smoke.sh
 ```
 
+For a compact local API contract demo that captures success and failure responses:
+
+```bash
+bash demo/local-api-contract-demo.sh
+```
+
+See [docs/tutorials/local-api-contract-demo.md](docs/tutorials/local-api-contract-demo.md) for the walkthrough.
+
 ## Safety & Guarantees
 
 - **Local-first**: Reads only what you pass. No hidden API calls.
