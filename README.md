@@ -89,6 +89,14 @@ To verify that flow from one command:
 bash demo/checkout-contract-smoke.sh
 ```
 
+For a compact local API contract demo that captures success and failure responses:
+
+```bash
+bash demo/local-api-contract-demo.sh
+```
+
+See [docs/tutorials/local-api-contract-demo.md](docs/tutorials/local-api-contract-demo.md) for the walkthrough.
+
 For local webhook receiver demos, see
 [docs/tutorials/webhook-receiver-fixtures.md](docs/tutorials/webhook-receiver-fixtures.md)
 or run:
