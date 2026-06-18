@@ -89,6 +89,15 @@ To verify that flow from one command:
 bash demo/checkout-contract-smoke.sh
 ```
 
+To capture response bodies and headers for a PR note or video walkthrough, run:
+
+```bash
+bash demo/checkout-artifacts.sh
+```
+
+See [the checkout artifacts tutorial](docs/tutorials/checkout-artifacts.md) for
+the expected evidence files.
+
 For a compact local API contract demo that captures success and failure responses:
 
 ```bash
