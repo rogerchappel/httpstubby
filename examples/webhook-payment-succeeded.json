@@ -1,0 +1,18 @@
+{
+  "route": {
+    "method": "POST",
+    "path": "/webhooks/payment.succeeded"
+  },
+  "response": {
+    "status": 202,
+    "headers": {
+      "Content-Type": "application/json",
+      "X-Webhook-Fixture": "payment-succeeded"
+    },
+    "body": {
+      "received": true,
+      "event": "payment.succeeded",
+      "next": "fulfill_order"
+    }
+  }
+}
