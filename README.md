@@ -135,3 +135,14 @@ MIT. See [LICENSE](LICENSE).
 ## Inspiration
 
 Borrowed the good parts from Mockoon, Prism, and WireMock — stripped the dashboards, killed the SaaS, kept the fixtures.
+
+## Release readiness
+
+Before opening a release PR, run the same checks that CI runs:
+
+```sh
+npm run release:check
+npm pack --dry-run
+```
+
+The package smoke keeps the published tarball contents visible before tagging or publishing.
