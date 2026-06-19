@@ -79,6 +79,7 @@ httpstubby serve --dir ./examples
 curl http://127.0.0.1:8787/api/status     # → 200 healthy
 curl -X POST http://127.0.0.1:8787/api/login   # → 401 unauthorized
 curl -X POST http://127.0.0.1:8787/api/users   # → 201 created
+curl -X POST http://127.0.0.1:8787/webhooks/payment.succeeded   # → 202 accepted
 ```
 
 For a slightly fuller checkout-flow demo, see [docs/tutorials/checkout-fixtures.md](docs/tutorials/checkout-fixtures.md).
@@ -92,6 +93,31 @@ For a webhook-style contract check with a custom response header:
 
 ```bash
 bash demo/webhook-contract-smoke.sh
+```
+
+To capture response bodies and headers for a PR note or video walkthrough, run:
+
+```bash
+bash demo/checkout-artifacts.sh
+```
+
+See [the checkout artifacts tutorial](docs/tutorials/checkout-artifacts.md) for
+the expected evidence files.
+
+For a compact local API contract demo that captures success and failure responses:
+
+```bash
+bash demo/local-api-contract-demo.sh
+```
+
+See [docs/tutorials/local-api-contract-demo.md](docs/tutorials/local-api-contract-demo.md) for the walkthrough.
+
+For local webhook receiver demos, see
+[docs/tutorials/webhook-receiver-fixtures.md](docs/tutorials/webhook-receiver-fixtures.md)
+or run:
+
+```bash
+bash demo/webhook-receiver-smoke.sh
 ```
 
 ## Safety & Guarantees
@@ -124,3 +150,14 @@ MIT. See [LICENSE](LICENSE).
 ## Inspiration
 
 Borrowed the good parts from Mockoon, Prism, and WireMock — stripped the dashboards, killed the SaaS, kept the fixtures.
+
+## Release readiness
+
+Before opening a release PR, run the same checks that CI runs:
+
+```sh
+npm run release:check
+npm pack --dry-run
+```
+
+The package smoke keeps the published tarball contents visible before tagging or publishing.

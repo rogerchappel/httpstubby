@@ -1,0 +1,18 @@
+{
+  "route": {
+    "method": "POST",
+    "path": "/webhooks/payment.failed"
+  },
+  "response": {
+    "status": 409,
+    "headers": {
+      "Content-Type": "application/json",
+      "X-Webhook-Fixture": "payment-failed"
+    },
+    "body": {
+      "received": true,
+      "event": "payment.failed",
+      "next": "notify_customer"
+    }
+  }
+}
