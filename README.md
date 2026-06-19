@@ -88,6 +88,12 @@ To verify that flow from one command:
 bash demo/checkout-contract-smoke.sh
 ```
 
+For a webhook-style contract check with a custom response header:
+
+```bash
+bash demo/webhook-contract-smoke.sh
+```
+
 ## Safety & Guarantees
 
 - **Local-first**: Reads only what you pass. No hidden API calls.

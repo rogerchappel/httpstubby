@@ -9,6 +9,7 @@ These JSON files demonstrate common fixture patterns:
 | `created.json` | 201 created with resource body |
 | `checkout-catalog.json` | GET catalog response for a checkout demo |
 | `checkout-payment-declined.json` | POST checkout failure response |
+| `webhook-delivered.json` | POST webhook acknowledgement with a custom header |
 | `delayed.json.template` | Template for latency simulation |
 
 ## Usage
@@ -20,6 +21,8 @@ curl -X POST http://127.0.0.1:8787/api/login
 curl -X POST http://127.0.0.1:8787/api/users
 curl http://127.0.0.1:8787/api/catalog
 curl -X POST http://127.0.0.1:8787/api/checkout
+curl -X POST http://127.0.0.1:8787/webhooks/order-delivered
 ```
 
 See [Checkout Fixture Demo](../docs/tutorials/checkout-fixtures.md) for a complete tutorial.
+See [Webhook Fixture Demo](../docs/tutorials/webhook-fixtures.md) for a webhook-style contract check.
