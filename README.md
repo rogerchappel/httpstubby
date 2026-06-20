@@ -89,6 +89,15 @@ To verify that flow from one command:
 bash demo/checkout-contract-smoke.sh
 ```
 
+For browser-style preflight evidence, run:
+
+```bash
+bash demo/cors-preflight-smoke.sh
+```
+
+That script starts the server with `--cors`, captures `OPTIONS` response
+headers, and verifies the catalog fixture still returns the expected body.
+
 To capture response bodies and headers for a PR note or video walkthrough, run:
 
 ```bash
