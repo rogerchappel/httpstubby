@@ -114,6 +114,15 @@ or run:
 bash demo/webhook-receiver-smoke.sh
 ```
 
+To smoke the full example catalog and capture success plus failure artifacts:
+
+```bash
+bash demo/example-catalog-smoke.sh
+```
+
+See [docs/tutorials/example-catalog-smoke.md](docs/tutorials/example-catalog-smoke.md)
+for the response files it writes.
+
 ## Safety & Guarantees
 
 - **Local-first**: Reads only what you pass. No hidden API calls.
