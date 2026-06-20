@@ -95,6 +95,15 @@ For a webhook-style contract check with a custom response header:
 bash demo/webhook-contract-smoke.sh
 ```
 
+For browser-style preflight evidence, run:
+
+```bash
+bash demo/cors-preflight-smoke.sh
+```
+
+That script starts the server with `--cors`, captures `OPTIONS` response
+headers, and verifies the catalog fixture still returns the expected body.
+
 To capture response bodies and headers for a PR note or video walkthrough, run:
 
 ```bash
@@ -119,6 +128,15 @@ or run:
 ```bash
 bash demo/webhook-receiver-smoke.sh
 ```
+
+To smoke the full example catalog and capture success plus failure artifacts:
+
+```bash
+bash demo/example-catalog-smoke.sh
+```
+
+See [docs/tutorials/example-catalog-smoke.md](docs/tutorials/example-catalog-smoke.md)
+for the response files it writes.
 
 ## Safety & Guarantees
 
