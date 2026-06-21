@@ -1,0 +1,18 @@
+{
+  "route": {
+    "method": "POST",
+    "path": "/webhooks/order-delivered"
+  },
+  "response": {
+    "status": 202,
+    "headers": {
+      "Content-Type": "application/json",
+      "X-Stub-Event": "order.delivered"
+    },
+    "body": {
+      "accepted": true,
+      "event": "order.delivered",
+      "queued": false
+    }
+  }
+}
