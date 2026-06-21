@@ -9,10 +9,14 @@
   },
   "files": [
     "src",
+    "docs",
+    "examples",
+    "demo",
     "README.md",
     "LICENSE",
     "SECURITY.md",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "CONTRIBUTING.md"
   ],
   "scripts": {
     "test": "node --test",
