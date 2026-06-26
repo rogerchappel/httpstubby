@@ -138,6 +138,16 @@ bash demo/example-catalog-smoke.sh
 See [docs/tutorials/example-catalog-smoke.md](docs/tutorials/example-catalog-smoke.md)
 for the response files it writes.
 
+To capture a compact route matrix across success, failure, webhook, and
+missing-route behavior:
+
+```bash
+bash demo/fixture-matrix-smoke.sh
+```
+
+See [docs/tutorials/fixture-matrix-smoke.md](docs/tutorials/fixture-matrix-smoke.md)
+for the generated summary file and evidence list.
+
 ## Safety & Guarantees
 
 - **Local-first**: Reads only what you pass. No hidden API calls.
