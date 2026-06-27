@@ -148,6 +148,16 @@ bash demo/fixture-matrix-smoke.sh
 See [docs/tutorials/fixture-matrix-smoke.md](docs/tutorials/fixture-matrix-smoke.md)
 for the generated summary file and evidence list.
 
+For the shortest success/failure fixture proof:
+
+```bash
+bash demo/status-login-smoke.sh
+```
+
+See [docs/tutorials/status-login-smoke.md](docs/tutorials/status-login-smoke.md)
+and [docs/promo/status-login-demo-hooks.md](docs/promo/status-login-demo-hooks.md)
+for the captured artifacts and promotion notes.
+
 ## Safety & Guarantees
 
 - **Local-first**: Reads only what you pass. No hidden API calls.
